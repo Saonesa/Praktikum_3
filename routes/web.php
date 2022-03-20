@@ -27,10 +27,17 @@ Route::get('/user-profile', [DashboardController::class, 'profile']);
 Route::get('/list-post', [PostController::class, 'index']);
 Route::get('/add-post', [PostController::class, 'create']);
 Route::get('/edit-post', [PostController::class, 'edit']);
-Route::get('/list-user', [UserController::class, 'index']);
+
 
 Route::get('/list-article', [ArticleController::class, 'index'])->name('article.index');
 
+Route::get('/list-user', [UserController::class, 'index'])->name('list');;
+Route::get('/user/{id}', [UserController::class, 'show'])->name('show-user');
+Route::get('/add-user', [UserController::class, 'create'])->name('add_user');
+Route::post('/store-user', [UserController::class, 'store']);
+Route::get('/edit/{id}', [UserController::class, 'edit'])->name('edit_user');
+Route::put('/update/{id}', [UserController::class, 'update'])->name('update_user'); 
+Route::delete('/delete/{id}', [UserController::class, 'destroy'])->name('destroy-siswa');
 
 Route::get('/list-trip', [TripController::class, 'index']);
 

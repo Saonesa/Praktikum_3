@@ -5,7 +5,7 @@
                 <span class="copyright">
                   © <script>
                     document.write(new Date().getFullYear())
-                  </script>, made by <a href="https://github.com/RandyAndrian" style="text-decoration: none">Muhamad Randy Andrian</a>
+                  </script>, made by <a href="https://github.com/Saonesa" style="text-decoration: none">Sahrul Gunawan</a>
                 </span>
               </div>
             </div>

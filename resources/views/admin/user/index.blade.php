@@ -10,7 +10,7 @@
                     <div class="row ml-3">
                     <h4 class="card-title">{{ $title }}</h4>
                     <div class="d-flex ml-3">
-                        <a href="/add-post" class="btn btn-primary">Create Post</a>
+                        <a href="/add-user" class="btn btn-primary">Create User</a>
                     </div>
                     </div>
                 </div>
@@ -20,34 +20,38 @@
                   <div class="table-responsive">
                         <table class="table">
                             <thead class="text-black">
-                                <th scope="col">#</th>
-                                <th scope="col"> NIK </th>
-                                <th scope="col"> Nama  </th>
-                                <th scope="col"> Jenis Kelamin</th>
-                                <th scope="col"> Tanggal Lahir </th>
-                                <th scope="col"> Alamat</th>
-                                <th scope="col"> Provinsi </th>
-                                <th scope="col"> No. Telp </th>
-                                <th scope="col"> Email </th>
-                                <th scope="col"> Photo </th>
-                                <th scope="col"> Action </th>
+                                <th scope="col-lg-12">NO </th>
+                                <th scope="col-lg-12"> NIK </th>
+                                <th scope="col-lg-12"> Nama  </th>
+                                <th scope="col-lg-12"> Jenis Kelamin</th>
+                                <th scope="col-lg-12"> Tanggal Lahir </th>
+                                <th scope="col-lg-12"> Alamat</th>
+                                <th scope="col-lg-12"> No. Telp </th>
+                                <th scope="col-lg-12"> Email </th>
+                                <th scope="col-lg-12"> Photo </th>
+                                <th scope="col-lg-12"> Action </th>
                             </thead>
                             <tbody>
+
+                            <?php $i = 0;?>
                                 @foreach ( $users as $u)
+
+                            <?php $i++ ;?>    
                                 <tr>
-                                  <th scope="row">1</th>
+                                    <td>{{ $i }}</td>
                                     <td> {{ $u->nik }} </td>
                                     <td> {{ $u->name }} </td>
                                     <td> {{ $u->jk }} </td>
                                     <td> {{ $u->tgl_lahir }} </td>
                                     <td> {{ $u->alamat }} </td>
-                                    <td> {{ $u->provinsi }} </td>
                                     <td> {{ $u->telp }} </td>
                                     <td> {{ $u->email }} </td>
-                                    <td> {{ $u->Photo }} </td>
+                                    <td> {{ $u->photo }} </td>
                                     <td><form method="" action="">
-                            <a button type="button" class="btn btn-primary" href="#">Read</button></a>
-                                <a button type="button" class="btn btn-warning" href="/edit-post">Edit</button></a>
+                            <a button type="button" class="btn btn-primary" href="{{ route('show-user',$u->id) }}">Read</button></a>
+                            <a button type="button" class="btn btn-warning" href="{{ route('edit_user',$u->id) }}">Edit</button></a>
+                            @csrf
+                                @method('DELETE')
                                 <button type="submit" class="btn btn-danger">Delete</button>
                             </form></td>
                                 </tr>

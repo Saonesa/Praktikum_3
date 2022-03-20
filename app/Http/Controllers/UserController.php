@@ -27,7 +27,13 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        {
+            $data=[
+                'title'=>'Tambah User',
+                // 'route' => route(''),
+            ];
+            return view('admin.user.create', $data);
+        }
     }
 
     /**
@@ -38,7 +44,27 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $user = new User;
+        $user->nik = $request->nik;
+        $user->name = $request->name;
+        $user->jk=$request->jk;
+        $user->tgl_lahir=$request->tgl_lahir;
+        $user->alamat=$request->alamat;
+        $user->telp=$request->telp;
+
+        if ($request->hasFile('photo')) {
+            $image = $request->file('photo');
+           $filename = $user->nik . '-' . $user->id . '.' . $image->getClientOriginalExtension();
+           $location = $request->file('photo')->move('images/user/', $filename);
+           $user->photo = $location;
+       }
+        $user->email=$request->email;
+        $user->password=$request->password;
+
+
+        $user->save();
+        return redirect()->route('list');
     }
 
     /**
@@ -49,7 +75,14 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        
+
+            $data = [
+                'Title' => 'Curriculum Vitae',
+                'user' => User::where('id', $id)->first(),
+            ];
+            return view('admin.profile', $data);
+        
     }
 
     /**
@@ -60,7 +93,13 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = [
+            'title' => 'Edit User',
+            'method' => 'PUT',
+            'route' => route('update_user', $id),
+            'user' => User::where('id', $id)->first(),
+        ];
+        return view('admin.user.edit', $data);
     }
 
     /**
@@ -72,7 +111,25 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::find($id);
+        $user->nik = $request->nik;
+        $user->name = $request->name;
+        $user->jk=$request->jk;
+        $user->tgl_lahir=$request->tgl_lahir;
+        $user->alamat=$request->alamat;
+        $user->telp=$request->telp;
+
+        if ($request->hasFile('photo')) {
+            $image = $request->file('photo');
+           $filename = $user->nik . '-' . $user->id . '.' . $image->getClientOriginalExtension();
+           $location = $request->file('photo')->move('images/user/', $filename);
+           $user->photo = $location;
+       }
+        $user->email=$request->email;
+        $user->password=$request->password;
+        
+        $user->update();
+        return redirect()->route('list');
     }
 
     /**
@@ -83,6 +140,10 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
+        $destroy =User::where('id', $id);
+        $destroy->delete();
+        return redirect(route('list'));
+        
     }
 }
